@@ -6,16 +6,40 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>org.clojure Sonatype OSS deploy POM</name>
+    <description>Top-level parent POM enabling Sonatype OSS / central deployment for org.clojure artifacts from build.clojure.org.</description>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>5</version>
     </parent>
-
+    
     <modules>
         <module>pom.contrib</module>
         <module>pom.baseline</module>
     </modules>
+
+    <developers>
+        <developer>
+            <name>Chas Emerick</name>
+            <url>http://cemerick.com</url>
+            <email>cemerick@snowtide.com</email>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:clojure/build.poms.git</connection>
+        <developerConnection>scm:git:git@github.com:clojure/build.poms.git</developerConnection>
+        <url>git@github.com:clojure/build.poms.git</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Eclipse Public License 1.0</name>
+            <url>http://opensource.org/licenses/eclipse-1.0.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 </project>
