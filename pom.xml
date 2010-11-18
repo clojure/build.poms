@@ -41,4 +41,22 @@
         </license>
     </licenses>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- do not push pre-deployment SCM changes to upstream repo with maven release plugin;
+                         if the release/deploy fails, we're stuck with manually fixing up version numbers,
+                         git history, etc -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <pushChanges>false</pushChanges>
+                        <localCheckout>true</localCheckout>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
