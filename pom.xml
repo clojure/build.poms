@@ -3,7 +3,7 @@
     <groupId>org.clojure</groupId>
     <artifactId>pom.oss-deploy</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.14-SNAPSHOT</version>
+    <version>0.0.14</version>
     <name>org.clojure Sonatype OSS deploy POM</name>
     <description>Top-level parent POM enabling Sonatype OSS / central deployment for org.clojure artifacts from build.clojure.org.</description>
 
