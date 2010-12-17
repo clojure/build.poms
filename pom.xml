@@ -1,62 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.clojure</groupId>
-    <artifactId>pom.oss-deploy</artifactId>
-    <packaging>pom</packaging>
-    <version>0.0.20-SNAPSHOT</version>
-    <name>org.clojure Sonatype OSS deploy POM</name>
-    <description>Top-level parent POM enabling Sonatype OSS / central deployment for org.clojure artifacts from build.clojure.org.</description>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.clojure</groupId>
+  <artifactId>pom.contrib</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.20-SNAPSHOT</version>
+  <name>org.clojure contrib parent POM</name>
+  <description>Parent POM for projects contributed to Clojure</description>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>5</version>
-    </parent>
-    
-    <modules>
-        <module>pom.contrib</module>
-        <module>pom.baseline</module>
-    </modules>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>5</version>
+  </parent>
 
-    <developers>
-        <developer>
-            <name>Chas Emerick</name>
-            <url>http://cemerick.com</url>
-            <email>cemerick@snowtide.com</email>
-            <timezone>-5</timezone>
-        </developer>
-    </developers>
+  <properties>
+    <!-- Builds will use this release version of Clojure, may be
+         overridden in projects. -->
+    <clojure.version>1.2.0</clojure.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-    <scm>
-        <connection>scm:git:git@github.com:clojure/build.poms.git</connection>
-        <developerConnection>scm:git:git@github.com:clojure/build.poms.git</developerConnection>
-        <url>git@github.com:clojure/build.poms.git</url>
-    </scm>
+  <scm>
+    <connection>scm:git:git@github.com:clojure/build.poms.git</connection>
+    <developerConnection>scm:git:git@github.com:clojure/build.poms.git</developerConnection>
+    <url>git@github.com:clojure/build.poms.git</url>
+  </scm>
 
-    <licenses>
-        <license>
-            <name>Eclipse Public License 1.0</name>
-            <url>http://opensource.org/licenses/eclipse-1.0.php</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+  <licenses>
+    <license>
+      <name>Eclipse Public License 1.0</name>
+      <url>http://opensource.org/licenses/eclipse-1.0.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <!-- do not push pre-deployment SCM changes to upstream repo with maven release plugin;
-                         if the release/deploy fails, we're stuck with manually fixing up version numbers,
-                         git history, etc -->
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.1</version>
-                    <configuration>
-                        <pushChanges>false</pushChanges>
-                        <localCheckout>true</localCheckout>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+  <build>
+    <resources>
+      <resource>
+	<directory>src/main/clojure</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+	<!-- By default, do not include any AOT-compiled .class files
+	     in the JAR. Projects may override as needed. -->
+	<groupId>com.theoryinpractise</groupId>
+	<artifactId>clojure-maven-plugin</artifactId>
+	<version>1.3.7</version>
+	<extensions>true</extensions>
+	<configuration>
+	  <warnOnReflection>true</warnOnReflection>
+	  <temporaryOutputDirectory>true</temporaryOutputDirectory>
+	</configuration>
+      </plugin>
+      <plugin>
+	<!-- Clojure targets Java 1.5 -->
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<configuration>
+	  <source>1.5</source>
+	  <target>1.5</target>
+	  <encoding>${project.build.sourceEncoding}</encoding>
+	</configuration>
+      </plugin>
+      <plugin>
+	<!-- do not push pre-deployment SCM changes to upstream repo
+	     with maven release plugin; if the release/deploy fails,
+	     we're stuck with manually fixing up version numbers, git
+	     history, etc -->
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-release-plugin</artifactId>
+	<version>2.1</version>
+	<configuration>
+	  <pushChanges>false</pushChanges>
+	  <localCheckout>true</localCheckout>
+	</configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- Permit compiling/testing any contrib project with a
+       locally-built Clojure with "mvn
+       -Dclojure.jar=/path/to/some/local/clojure.jar" -->
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+	<activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+	<dependency>
+	  <groupId>org.clojure</groupId>
+	  <artifactId>clojure</artifactId>
+	  <version>${clojure.version}</version>
+	</dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>local-clojure-dep</id>
+      <activation>
+	<property>
+	  <name>clojure.jar</name>
+	</property>
+      </activation>
+      <dependencies>
+	<dependency>
+	  <groupId>org.clojure</groupId>
+	  <artifactId>clojure</artifactId>
+	  <version>LOCALJAR</version>
+	  <scope>system</scope>
+	  <systemPath>${clojure.jar}</systemPath>
+	</dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>
