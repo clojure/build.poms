@@ -6,6 +6,7 @@
   <version><!-- your project's version number --></version>
   <name><!-- your project's name --></name>
   <description><!-- your project's description --></description>
+  <url>https://github.com/clojure/<!-- your project's github name --></url>
   <packaging>clojure</packaging>
 
   <developers>
