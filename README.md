@@ -1,8 +1,9 @@
 org.clojure parent POMs
 ========================================
 
-This project defines a parent POM for projects contributed to Clojure and
-built at [build.clojure.org](http://build.clojure.org). 
+This project defines a parent Maven Project Object Model (POM) for
+projects contributed to Clojure and built at
+[build.clojure.org](http://build.clojure.org).
 
 
 What does this POM do?
@@ -14,13 +15,13 @@ baseline for libraries contributed to Clojure, including:
 * Parent POM: org.sonatype.oss:oss-parent
   * enables automated releases to the Sonatype open-source Maven repository, and then to the Maven central repository
 * Build properties
-  * ${clojure.version} defined to be the most recent release of Clojure
+  * `clojure.version` defined to be the most recent release of Clojure
     * This may be an alpha or beta release
     * This may be changed on the Maven command line to test with different versions
-  * ${clojure.warnOnReflection}
+  * `clojure.warnOnReflection` sets the `*warn-on-reflection*` flag during compilation
     * Defaults to false
-    * This may be changed on the Maven command line to test with *warn-on-reflection* true
-  * ${project.build.sourceEncoding} set to UTF-8
+    * This may be changed on the Maven command line to test with `*warn-on-reflection*` true
+  * `project.build.sourceEncoding` set to UTF-8
 * License set to EPL 1.0
 * Build plugin configuration
   * build-helper-maven-plugin
@@ -39,7 +40,7 @@ baseline for libraries contributed to Clojure, including:
     * Runs tests defined with clojure.test
 * Build profiles
   * Default profile
-    * Adds dependency on a Clojure release defined by ${clojure.version}
+    * Adds dependency on a Clojure release defined by the `clojure.version` property
   * "local-clojure-dep" profile
     * Adds "system" dependency on a Clojure JAR anywhere on the local filesystem
     * Enabled by setting the `clojure.jar` property on the command line
