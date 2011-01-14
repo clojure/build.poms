@@ -15,8 +15,11 @@ baseline for libraries contributed to Clojure, including:
   * enables automated releases to the Sonatype open-source Maven repository, and then to the Maven central repository
 * Build properties
   * ${clojure.version} defined to be the most recent release of Clojure
-  ** This may be an alpha or beta release
+    * This may be an alpha or beta release
     * This may be changed on the Maven command line to test with different versions
+  * ${clojure.warnOnReflection}
+    * Defaults to false
+    * This may be changed on the Maven command line to test with *warn-on-reflection* true
   * ${project.build.sourceEncoding} set to UTF-8
 * License set to EPL 1.0
 * Build plugin configuration
