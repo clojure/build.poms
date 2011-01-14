@@ -18,6 +18,9 @@
     <!-- Builds will use this release version of Clojure, may be
          overridden in projects or at the command line. -->
     <clojure.version>1.2.0</clojure.version>
+    <!-- By default, do not enable *warn-on-reflection*, may be
+	 overridden in projects at the command line. -->
+    <clojure.warnOnReflection>false</clojure.warnOnReflection>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -78,7 +81,7 @@
 	<version>1.3.7</version>
 	<extensions>true</extensions>
 	<configuration>
-	  <warnOnReflection>true</warnOnReflection>
+	  <warnOnReflection>${clojure.warnOnReflection}</warnOnReflection>
 	  <temporaryOutputDirectory>true</temporaryOutputDirectory>
 	</configuration>
       </plugin>
