@@ -27,4 +27,13 @@
     <developerConnection>scm:git:git@github.com:clojure/<!-- your project's github name -->.git</developerConnection>
     <url>git@github.com:clojure/<!-- your project's github name -->.git</url>
   </scm>
+
+  <!-- By default, contrib builds will target the latest Clojure
+       release, even alphas. If you want to build with a different
+       Clojure version, uncomment the following: -->
+  <!--
+  <properties>
+    <clojure.version>1.2.0</clojure.version>
+  </properties>
+  -->
 </project>
