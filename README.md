@@ -25,9 +25,9 @@ baseline for libraries contributed to Clojure, including:
 * License set to EPL 1.0
 * Build plugin configuration
   * build-helper-maven-plugin
-    * Adds src/main/clojure to the source directories for the project
-    * Adds src/test/clojure to the test source directories for the project
-    * Ensures sources will be recognized by other plugins, such as the JAR archiver
+    * Adds src/main/clojure to the source and resource directories for the project
+    * Adds src/test/clojure to the test source and test resource directories for the project
+    * Ensures sources will be recognized by other plugins and copied to the output JAR
   * maven-compiler-plugin
     * Sets Java source and target version to 1.5
     * Sets Java source file encoding to UTF-8
@@ -36,12 +36,11 @@ baseline for libraries contributed to Clojure, including:
   * com.theoryinpractise:clojure-maven-plugin
     * AOT-compiles all .clj sources as a syntax check
     * Does *not* include any AOT-compiled .class files in the output JAR
-    * Sets `*warn-on-reflection*` true during compilation
     * Runs tests defined with clojure.test
 * Build profiles
   * Default profile
     * Adds dependency on a Clojure release defined by the `clojure.version` property
-  * "local-clojure-dep" profile
+  * "local-clojure-jar" profile
     * Adds "system" dependency on a Clojure JAR anywhere on the local filesystem
     * Enabled by setting the `clojure.jar` property on the command line
       * Must be set to the absolute path to the Clojure JAR file
