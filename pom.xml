@@ -144,7 +144,7 @@
       </dependencies>
     </profile>
     <profile>
-      <id>local-clojure-dep</id>
+      <id>local-clojure-jar</id>
       <activation>
 	<property>
 	  <name>clojure.jar</name>
