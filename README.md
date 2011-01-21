@@ -37,6 +37,7 @@ baseline for libraries contributed to Clojure, including:
     * AOT-compiles all .clj sources as a syntax check
     * Does *not* include any AOT-compiled .class files in the output JAR
     * Runs tests defined with clojure.test
+    * Does *not* AOT-compile test .clj sources
 * Build profiles
   * Default profile
     * Adds dependency on a Clojure release defined by the `clojure.version` property
