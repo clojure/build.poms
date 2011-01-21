@@ -21,6 +21,9 @@
     <!-- By default, do not enable *warn-on-reflection*, may be
 	 overridden in projects at the command line. -->
     <clojure.warnOnReflection>false</clojure.warnOnReflection>
+
+    <clojure.source.dir>src/main/clojure</clojure.source.dir>
+    <clojure.testSource.dir>src/test/clojure</clojure.testSource.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -48,26 +51,38 @@
         <executions>
           <execution>
             <id>add-clojure-source-dirs</id>
-            <phase>initialize</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>add-source</goal>
+              <goal>add-resource</goal>
             </goals>
             <configuration>
               <sources>
-		<source>src/main/clojure</source>
+		<source>${clojure.source.dir}</source>
               </sources>
+              <resources>
+		<resource>
+		  <directory>${clojure.source.dir}</directory>
+		</resource>
+              </resources>
             </configuration>
           </execution>
           <execution>
             <id>add-clojure-test-source-dirs</id>
-            <phase>initialize</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>add-test-source</goal>
+              <goal>add-test-resource</goal>
             </goals>
             <configuration>
               <sources>
-		<source>src/test/clojure</source>
+		<source>${clojure.testSource.dir}</source>
               </sources>
+              <resources>
+		<resource>
+		  <directory>${clojure.testSource.dir}</directory>
+		</resource>
+              </resources>
             </configuration>
           </execution>
         </executions>
