@@ -28,9 +28,9 @@
   </properties>
 
   <scm>
-    <connection>scm:git:git@github.com:clojure/build.poms.git</connection>
+    <connection>git://github.com/clojure/build.poms.git</connection>
     <developerConnection>scm:git:git@github.com:clojure/build.poms.git</developerConnection>
-    <url>git@github.com:clojure/build.poms.git</url>
+    <url>https://github.com/clojure/build.poms</url>
   </scm>
 
   <licenses>
