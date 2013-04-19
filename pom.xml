@@ -182,6 +182,16 @@
       <id>sonatype-oss-release</id>
       <!-- This profile is enabled automatically by the Sonatype
            oss-parent POM when invoking the Maven Release Plugin -->
+      <dependencies>
+        <!-- Copy default Clojure dependency here, because enabling
+             the sonatype-oss-release profile will disable the default
+             proile. -->
+	<dependency>
+	  <groupId>org.clojure</groupId>
+	  <artifactId>clojure</artifactId>
+	  <version>${clojure.version}</version>
+	</dependency>
+      </dependencies>
       <build>
         <plugins>
           <plugin>
