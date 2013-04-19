@@ -178,7 +178,9 @@
       </dependencies>
     </profile>
     <profile>
-      <id>sonatype-oss</id>
+      <id>sonatype-oss-release</id>
+      <!-- This profile is enabled automatically by the Sonatype
+           oss-parent POM when invoking the Maven Release Plugin -->
       <build>
         <plugins>
           <plugin>
