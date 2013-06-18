@@ -185,7 +185,7 @@
       <dependencies>
         <!-- Copy default Clojure dependency here, because enabling
              the sonatype-oss-release profile will disable the default
-             proile. -->
+             profile. -->
 	<dependency>
 	  <groupId>org.clojure</groupId>
 	  <artifactId>clojure</artifactId>
