@@ -28,12 +28,19 @@
     <url>git@github.com:clojure/<!-- your project's github name -->.git</url>
   </scm>
 
-  <!-- By default, contrib builds will target the latest Clojure
-       release, even alphas. If you want to build with a different
-       Clojure version, uncomment the following: -->
+  <!-- Optional properties: uncomment this section to enable.
+
+       <clojure.version> - pom.contrib specifies a default version of
+       Clojure to build with (usually the latest stable release). If
+       you want a different version, set it here.
+
+       <clojure.warnOnReflection> - sets *warn-on-reflection* during
+       builds. Defaults to false, set to true here if you want.
+  -->
   <!--
   <properties>
     <clojure.version>1.2.0</clojure.version>
+    <clojure.warnOnReflection>true</clojure.warnOnReflection>
   </properties>
   -->
 </project>
