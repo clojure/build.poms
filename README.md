@@ -12,8 +12,6 @@ What does this POM do?
 The pom.xml file of this project defines a common configuration
 baseline for libraries contributed to Clojure, including:
 
-* Parent POM: org.sonatype.oss:oss-parent
-  * enables automated releases to the Sonatype open-source Maven repository, and then to the Maven central repository
 * Build properties
   * `clojure.version` defined to be the most recent release of Clojure
     * This may be an alpha or beta release
@@ -28,23 +26,22 @@ baseline for libraries contributed to Clojure, including:
     * Adds src/main/clojure to the source and resource directories for the project
     * Adds src/test/clojure to the test source and test resource directories for the project
     * Ensures sources will be recognized by other plugins and copied to the output JAR
-  * maven-compiler-plugin
-    * Sets Java source and target version to 1.5
-    * Sets Java source file encoding to UTF-8
-  * maven-release-plugin
-    * Prevents tags and other changes from being pushed to Git when a release build fails
   * com.theoryinpractise:clojure-maven-plugin
     * AOT-compiles all .clj sources as a syntax check
     * Does *not* include any AOT-compiled .class files in the output JAR
     * Runs tests defined with clojure.test
     * Does *not* AOT-compile test .clj sources
-* Build profiles
-  * Default profile
-    * Adds dependency on a Clojure release defined by the `clojure.version` property
-  * "local-clojure-jar" profile
-    * Adds "system" dependency on a Clojure JAR anywhere on the local filesystem
-    * Enabled by setting the `clojure.jar` property on the command line
-      * Must be set to the absolute path to the Clojure JAR file
+  * maven-compiler-plugin
+    * Sets Java source and target version to 1.6
+    * Sets Java source file encoding to UTF-8
+  * maven-release-plugin
+    * Prevents tags and other changes from being pushed to Git when a release build fails
+  * nexus-staging-maven-plugin
+    * Deploy to Nexus repo (in this case, the sonatype repo)
+  * maven-gpg-plugin
+    * Sign artifacts prior to deployment 
+* Dependencies
+  * Adds dependency on a Clojure release defined by the `clojure.version` property
 
 
 What do contrib projects need to do?

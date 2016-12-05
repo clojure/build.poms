@@ -4,22 +4,16 @@
   <groupId>org.clojure</groupId>
   <artifactId>pom.contrib</artifactId>
   <packaging>pom</packaging>
-  <version>0.1.3-SNAPSHOT</version>
+  <version>0.2.0-SNAPSHOT</version>
   <name>org.clojure contrib parent POM</name>
   <description>Parent POM for projects contributed to Clojure</description>
-
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
-  </parent>
 
   <properties>
     <!-- Builds will use this release version of Clojure, may be
          overridden in projects or at the command line. -->
     <clojure.version>1.4.0</clojure.version>
     <!-- By default, do not enable *warn-on-reflection*, may be
-	 overridden in projects at the command line. -->
+         overridden in projects at the command line. -->
     <clojure.warnOnReflection>false</clojure.warnOnReflection>
 
     <clojure.source.dir>src/main/clojure</clojure.source.dir>
@@ -42,13 +36,29 @@
     </license>
   </licenses>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>${clojure.version}</version>
+    </dependency>
+  </dependencies>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <!-- This id is linked to the key setup on the CI server -->
+      <id>sonatype-nexus-staging</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
-	<!-- Add Clojure sources to the project's source directories -->
+        <!-- Add Clojure sources to the project's source directories -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.5</version>
+        <version>1.12</version>
         <executions>
           <execution>
             <id>add-clojure-source-dirs</id>
@@ -59,12 +69,12 @@
             </goals>
             <configuration>
               <sources>
-		<source>${clojure.source.dir}</source>
+                <source>${clojure.source.dir}</source>
               </sources>
               <resources>
-		<resource>
-		  <directory>${clojure.source.dir}</directory>
-		</resource>
+                <resource>
+                  <directory>${clojure.source.dir}</directory>
+                </resource>
               </resources>
             </configuration>
           </execution>
@@ -77,154 +87,103 @@
             </goals>
             <configuration>
               <sources>
-		<source>${clojure.testSource.dir}</source>
+                <source>${clojure.testSource.dir}</source>
               </sources>
               <resources>
-		<resource>
-		  <directory>${clojure.testSource.dir}</directory>
-		</resource>
+                <resource>
+                  <directory>${clojure.testSource.dir}</directory>
+                </resource>
               </resources>
             </configuration>
           </execution>
         </executions>
       </plugin>
+
       <plugin>
-	<!-- By default, compile everything as a sanity check, but do
-	     not include any AOT-compiled .class files in the
-	     JAR. Projects may override as needed. -->
-	<groupId>com.theoryinpractise</groupId>
-	<artifactId>clojure-maven-plugin</artifactId>
-	<version>1.3.13</version>
-	<extensions>true</extensions>
-	<configuration>
-	  <warnOnReflection>${clojure.warnOnReflection}</warnOnReflection>
-	  <temporaryOutputDirectory>true</temporaryOutputDirectory>
-	</configuration>
-	<executions>
-	  <execution>
-	    <id>clojure-compile</id>
-	    <phase>compile</phase>
-	    <goals>
-	      <goal>compile</goal>
-	    </goals>
-	  </execution>
-	  <execution>
-	    <id>clojure-test</id>
-	    <phase>test</phase>
-	    <goals>
-	      <goal>test</goal>
-	    </goals>
-	  </execution>
-	</executions>
+      <!-- By default, compile everything as a sanity check, but do
+           not include any AOT-compiled .class files in the
+           JAR. Projects may override as needed. -->
+        <groupId>com.theoryinpractise</groupId>
+        <artifactId>clojure-maven-plugin</artifactId>
+        <version>1.7.1</version>
+        <extensions>true</extensions>
+        <configuration>
+          <warnOnReflection>${clojure.warnOnReflection}</warnOnReflection>
+          <temporaryOutputDirectory>true</temporaryOutputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>clojure-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>clojure-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
+
       <plugin>
-	<!-- Clojure targets Java 1.5 -->
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-	<configuration>
-	  <source>1.5</source>
-	  <target>1.5</target>
-	  <encoding>${project.build.sourceEncoding}</encoding>
-	</configuration>
+        <!-- Clojure targets Java 1.6+ -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
+          <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
       </plugin>
+
       <plugin>
-	<!-- do not push pre-deployment SCM changes to upstream repo
-	     with maven release plugin; if the release/deploy fails,
-	     we're stuck with manually fixing up version numbers, git
-	     history, etc -->
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-release-plugin</artifactId>
-	<version>2.4.1</version>
-	<configuration>
-	  <pushChanges>false</pushChanges>
-	  <localCheckout>true</localCheckout>
-	</configuration>
+        <!-- do not push pre-deployment SCM changes to upstream repo
+	           with maven release plugin; if the release/deploy fails,
+             we're stuck with manually fixing up version numbers, git
+             history, etc -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+        </configuration>
+      </plugin>
+
+      <!-- deploy artifacts to sonatype -->
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <!-- The server "id" element from settings to use authentication from -->
+          <serverId>sonatype-nexus-staging</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+
+      <!-- sign artifacts for deployment -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
-
-  <!-- Permit compiling/testing any contrib project with a
-       locally-built Clojure by running
-       "mvn -Dclojure.jar=/path/to/some/local/clojure.jar" -->
-  <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-	<activeByDefault>true</activeByDefault>
-      </activation>
-      <dependencies>
-	<dependency>
-	  <groupId>org.clojure</groupId>
-	  <artifactId>clojure</artifactId>
-	  <version>${clojure.version}</version>
-	</dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>local-clojure-jar</id>
-      <activation>
-	<property>
-	  <name>clojure.jar</name>
-	</property>
-      </activation>
-      <dependencies>
-	<dependency>
-	  <groupId>org.clojure</groupId>
-	  <artifactId>clojure</artifactId>
-	  <version>LOCALJAR</version>
-	  <scope>system</scope>
-	  <systemPath>${clojure.jar}</systemPath>
-	</dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>sonatype-oss-release</id>
-      <!-- This profile is enabled automatically by the Sonatype
-           oss-parent POM when invoking the Maven Release Plugin -->
-      <dependencies>
-        <!-- Copy default Clojure dependency here, because enabling
-             the sonatype-oss-release profile will disable the default
-             profile. -->
-	<dependency>
-	  <groupId>org.clojure</groupId>
-	  <artifactId>clojure</artifactId>
-	  <version>${clojure.version}</version>
-	</dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <version>2.7</version>
-            <configuration>
-              <skip>true</skip>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.4.4</version>
-            <executions>
-              <execution>
-                <id>default-deploy</id>
-                <phase>deploy</phase>
-                <!-- By default, this is the phase deploy goal will bind to -->
-                <goals>
-                  <goal>deploy</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <!-- The Base URL of Nexus instance where we want to stage -->
-              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-              <!-- The server "id" element from settings to use authentication from -->
-              <serverId>sonatype-nexus-staging</serverId>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
