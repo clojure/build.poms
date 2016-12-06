@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId><!-- your project's artifact ID --></artifactId>
   <version><!-- your project's version number --></version>
-  <name><!-- your project's name, may reuse ${artifactId} --></name>
+  <name><!-- your project's name --></name>
   <description><!-- your project's description --></description>
   <url>https://github.com/clojure/<!-- your project's github name --></url>
 
