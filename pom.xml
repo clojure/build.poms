@@ -4,7 +4,7 @@
   <groupId>org.clojure</groupId>
   <artifactId>pom.contrib</artifactId>
   <packaging>pom</packaging>
-  <version>0.2.3-SNAPSHOT</version>
+  <version>0.3.0-SNAPSHOT</version>
   <name>pom.contrib</name>
   <description>Parent POM for projects contributed to Clojure</description>
   <url>https://github.com/clojure/build.poms</url>
@@ -12,7 +12,7 @@
   <properties>
     <!-- Builds will use this release version of Clojure, may be
          overridden in projects or at the command line. -->
-    <clojure.version>1.4.0</clojure.version>
+    <clojure.version>1.8.0</clojure.version>
     <!-- By default, do not enable *warn-on-reflection*, may be
          overridden in projects at the command line. -->
     <clojure.warnOnReflection>false</clojure.warnOnReflection>
@@ -43,6 +43,11 @@
       <name>Stuart Sierra</name>
       <url>https://github.com/stuartsierra</url>
     </developer>
+    <developer>
+      <id>alexmiller</id>
+      <name>Alex Miller</name>
+      <url>https://github.com/puredanger</url>
+    </developer>
   </developers>
 
   <dependencies>
@@ -67,7 +72,7 @@
         <!-- Add Clojure sources to the project's source directories -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.12</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <id>add-clojure-source-dirs</id>
@@ -139,13 +144,13 @@
       </plugin>
 
       <plugin>
-        <!-- Clojure targets Java 1.6+ -->
+        <!-- Clojure targets Java 1.8+ -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>3.8.1</version>
           <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
@@ -168,7 +173,7 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.7</version>
+        <version>1.6.8</version>
         <extensions>true</extensions>
         <configuration>
           <!-- The server "id" element from settings to use authentication from -->
