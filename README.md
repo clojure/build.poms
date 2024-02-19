@@ -32,7 +32,7 @@ baseline for libraries contributed to Clojure, including:
     * Runs tests defined with clojure.test
     * Does *not* AOT-compile test .clj sources
   * maven-compiler-plugin
-    * Sets Java source and target version to 1.8
+    * Sets Java source and target version to 1.9
     * Sets Java source file encoding to UTF-8
   * maven-release-plugin
     * Prevents tags and other changes from being pushed to Git when a release build fails
