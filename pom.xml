@@ -4,7 +4,7 @@
   <groupId>org.clojure</groupId>
   <artifactId>pom.contrib</artifactId>
   <packaging>pom</packaging>
-  <version>1.2.1-SNAPSHOT</version>
+  <version>1.3.0</version>
   <name>pom.contrib</name>
   <description>Parent POM for projects contributed to Clojure</description>
   <url>https://github.com/clojure/build.poms</url>
@@ -26,7 +26,7 @@
     <connection>scm:git:git@github.com:clojure/build.poms.git</connection>
     <developerConnection>scm:git:git@github.com:clojure/build.poms.git</developerConnection>
     <url>git@github.com:clojure/build.poms.git</url>
-    <tag>HEAD</tag>
+    <tag>v1.3.0</tag>
   </scm>
 
   <licenses>
