@@ -2,8 +2,7 @@ org.clojure parent POMs
 ========================================
 
 This project defines a parent Maven Project Object Model (POM) for
-projects contributed to Clojure and built at
-[build.clojure.org](http://build.clojure.org).
+projects contributed to Clojure.
 
 
 What does this POM do?
