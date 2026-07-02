@@ -28,19 +28,20 @@
     <url>git@github.com:clojure/<!-- your project's github name -->.git</url>
   </scm>
 
-  <!-- Optional properties: uncomment this section to enable.
+  <!-- Properties:
 
-       <clojure.version> - pom.contrib specifies a default version of
-       Clojure to build with (usually the latest stable release). If
-       you want a different version, set it here.
+       <project.build.outputTimestamp> - set this to any value initially,
+       the maven-release-plugin will update during each release.
 
-       <clojure.warnOnReflection> - sets *warn-on-reflection* during
+       <clojure.version> - optionally set a default version of
+       Clojure to build with. The parent pom.contrib will set a baseline.
+
+       <clojure.warnOnReflection> - optionally set *warn-on-reflection* during
        builds. Defaults to false, set to true here if you want.
   -->
-  <!--
   <properties>
     <clojure.version>1.11.4</clojure.version>
     <clojure.warnOnReflection>true</clojure.warnOnReflection>
+    <project.build.outputTimestamp>2026-07-02T13:45:50Z</project.build.outputTimestamp>
   </properties>
-  -->
 </project>
