@@ -4,7 +4,7 @@
   <groupId>org.clojure</groupId>
   <artifactId>pom.contrib</artifactId>
   <packaging>pom</packaging>
-  <version>1.4.2-SNAPSHOT</version>
+  <version>1.4.2</version>
   <name>pom.contrib</name>
   <description>Parent POM for projects contributed to Clojure</description>
   <url>https://github.com/clojure/build.poms</url>
@@ -20,14 +20,14 @@
     <clojure.source.dir>src/main/clojure</clojure.source.dir>
     <clojure.testSource.dir>src/test/clojure</clojure.testSource.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.outputTimestamp>2026-01-01T00:00:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-07-02T13:45:43Z</project.build.outputTimestamp>
   </properties>
 
   <scm>
     <connection>scm:git:git@github.com:clojure/build.poms.git</connection>
     <developerConnection>scm:git:git@github.com:clojure/build.poms.git</developerConnection>
     <url>git@github.com:clojure/build.poms.git</url>
-    <tag>HEAD</tag>
+    <tag>v1.4.2</tag>
   </scm>
 
   <licenses>
