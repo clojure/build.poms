@@ -20,7 +20,7 @@
     <clojure.source.dir>src/main/clojure</clojure.source.dir>
     <clojure.testSource.dir>src/test/clojure</clojure.testSource.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.outputTimestamp>2026-10-19T18:13:57Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
   </properties>
 
   <scm>
