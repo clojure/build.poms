@@ -20,6 +20,7 @@
     <clojure.source.dir>src/main/clojure</clojure.source.dir>
     <clojure.testSource.dir>src/test/clojure</clojure.testSource.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
   </properties>
 
   <scm>
@@ -190,6 +191,31 @@
           <autoPublish>true</autoPublish>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>io.github.git-commit-id</groupId>
+        <artifactId>git-commit-id-maven-plugin</artifactId>
+        <version>9.2.0</version>
+        <executions>
+          <execution>
+            <id>get-the-git-infos</id>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+            <phase>initialize</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+          <commitIdGenerationMode>full</commitIdGenerationMode>
+          <dateFormatTimeZone>UTC</dateFormatTimeZone>
+          <excludeProperties>
+            <excludeProperty>git.build.time</excludeProperty>
+          </excludeProperties>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
